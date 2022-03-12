@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Meu IMC</string>
+    <string name="insira_peso">Insira seu peso. (Kg)</string>
+    <string name="insira_altura">Insira sua altura. (m)</string>
+    <string name="calcule_imc">Calcule seu IMC</string>
+    <string name="aviso">(Use ponto no lugar de vírgula.)</string>
+    <string name="calcular">Calcular</string>
+    <string name="historico">Histórico de IMC</string>
+    <string name="indice">IMC</string>
+    <string name="data">Data</string>
+    <string name="grau_de_obesidade">Grau de obesidade</string>
+</resources>
