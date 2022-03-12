@@ -64,20 +64,27 @@ class MainActivity : AppCompatActivity() {
                 binding.resultadoText.text = ("Seu IMC: " + indice.roundDecimal(2) + "kg/m². \n"
                         + "Seu grau de obsidade: " + grauObs)
 
+                var indiceString = indice.roundDecimal(2)
+
                 val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
                 var currentDate = sdf.format(Date())
 
-                val imc = Imc (0,
-                    indice.roundDecimal(2).toString(),
+                val imc = Imc(0,
+                    indiceString,
                     currentDate.toString(),
                     grauObs)
 
                 Thread(Runnable {
                     db.imcDAO().insertAll(imc)
                     runOnUiThread {
-                        Toast.makeText(this, "IMC salvo.", Toast.LENGTH_LONG).show()
+                        var texto: String = ""
+                        indiceString = createEditable(texto).toString()
+                        currentDate = createEditable(texto).toString()
+                        grauObs = createEditable(texto).toString()
                     }
                 }).start()
+
+                Toast.makeText(this, "IMC salvo.", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -86,6 +93,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun createEditable(texto: String) =
+        Editable.Factory.getInstance().newEditable(texto)
 
     fun Float.roundDecimal(digit: Int) = "%.${digit}f".format(this)
 

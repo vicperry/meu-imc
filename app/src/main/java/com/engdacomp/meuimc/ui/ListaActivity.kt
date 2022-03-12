@@ -22,7 +22,7 @@ import kotlin.collections.ArrayList
 
 class ListaActivity : AppCompatActivity() {
 
-    private lateinit var binding: ListaBinding
+    private lateinit var bindingLista: ListaBinding
     lateinit var db: MyDataBase
     lateinit var itens : ArrayList<Imc>
     lateinit var imc : Imc
@@ -30,8 +30,8 @@ class ListaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ListaBinding.inflate(layoutInflater)
-        val view = binding.root
+        bindingLista = ListaBinding.inflate(layoutInflater)
+        val view = bindingLista.root
         setContentView(view)
 
         db = Room.databaseBuilder(
@@ -50,14 +50,16 @@ class ListaActivity : AppCompatActivity() {
         }).start()    }
 
     fun popular() {
-        val adapter = ImcAdapter(applicationContext, itens)
-        binding.recycler.layoutManager = LinearLayoutManager(applicationContext)
-        binding.recycler.itemAnimator = DefaultItemAnimator()
-        binding.recycler.adapter = adapter
+        runOnUiThread {
+            val adapter = ImcAdapter(applicationContext, itens)
+            bindingLista.recycler.layoutManager = LinearLayoutManager(applicationContext)
+            bindingLista.recycler.itemAnimator = DefaultItemAnimator()
+            bindingLista.recycler.adapter = adapter
+        }
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        var adapter = binding.recycler.adapter as ImcAdapter
+        var adapter = bindingLista.recycler.adapter as ImcAdapter
         imc = adapter.imc
         if(item!!.itemId == 0) {
             adapter.deleteContato()
@@ -68,7 +70,7 @@ class ListaActivity : AppCompatActivity() {
 
     private fun deletarImc(imc: Imc) {
         val timer = Timer()
-        val snackbar = Snackbar.make(binding.recycler, "Índice excluído com sucesso.", Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(bindingLista.recycler, "Índice excluído com sucesso.", Snackbar.LENGTH_LONG)
         snackbar.setAction("Desfazer", View.OnClickListener {
             timer.cancel()
             consulta()

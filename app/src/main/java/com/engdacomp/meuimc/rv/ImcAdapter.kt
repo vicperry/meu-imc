@@ -14,7 +14,6 @@ class ImcAdapter(
     var context: Context,
     var itens: ArrayList<Imc>
 ): RecyclerView.Adapter<ImcViewHolder>() {
-
     lateinit var imc: Imc
     var selectedPosition: Int = 0
 
