@@ -1,6 +1,7 @@
 package com.engdacomp.meuimc.ui
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -28,6 +29,7 @@ class ListaActivity : AppCompatActivity() {
     lateinit var imc : Imc
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingLista = ListaBinding.inflate(layoutInflater)
@@ -37,10 +39,15 @@ class ListaActivity : AppCompatActivity() {
         db = Room.databaseBuilder(
             applicationContext,
             MyDataBase::class.java,
-            "historicoImc").build()
+            "meusIMCs").build()
         consulta()
 
         Toast.makeText(this, "Segure no item para deletar da lista.", Toast.LENGTH_LONG).show()
+
+        bindingLista.backButton.setOnClickListener {
+            var intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun consulta() {

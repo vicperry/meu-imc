@@ -25,12 +25,12 @@ class ImcAdapter(
 
     override fun onBindViewHolder(viewHolder: ImcViewHolder, position: Int) {
         imc = itens.get(viewHolder.adapterPosition)
-        viewHolder.indice_tv.text = imc.indice.toString()
+        viewHolder.indice_tv.text = imc.indice
         viewHolder.data_tv.text = imc.data
         viewHolder.grau_obs_tv.text = imc.grauObs
 
         viewHolder.itemView.setOnClickListener {
-            Toast.makeText(context, "IMC clicado: " + imc.indice.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "IMC clicado: " + imc.indice, Toast.LENGTH_LONG).show()
             imc = itens.get(viewHolder.adapterPosition)
             selectedPosition = viewHolder.adapterPosition
         }

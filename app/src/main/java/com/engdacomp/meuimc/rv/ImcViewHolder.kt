@@ -14,7 +14,7 @@ class ImcViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
 
     val indice_tv : TextView = itemView!!.findViewById(R.id.indice_tv)
     val data_tv : TextView = itemView!!.findViewById(R.id.data_tv)
-    val grau_obs_tv : TextView = itemView!!.findViewById(R.id.data_tv)
+    val grau_obs_tv : TextView = itemView!!.findViewById(R.id.grau_obs_tv)
 
 
     override fun onLongClick(v: View?): Boolean {
