@@ -9,6 +9,8 @@ import androidx.room.Room
 import com.engdacomp.meuimc.databinding.ActivityMainBinding
 import com.engdacomp.meuimc.db.MyDataBase
 import com.engdacomp.meuimc.db.model.Imc
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        configuraAnuncio()
 
         db = Room.databaseBuilder(applicationContext, MyDataBase::class.java, "meusIMCs").build()
 
@@ -86,6 +89,15 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(applicationContext, ListaActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun configuraAnuncio() {
+        MobileAds.initialize(this) {}
+
+        val adView = binding.adView
+
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     fun Float.roundDecimal(digit: Int) = "%.${digit}f".format(this)
